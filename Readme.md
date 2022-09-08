@@ -5,11 +5,12 @@
 - [Conversions](#Conversions)
     + [Decimal to bits](#Decimal-to-bits)
     + [Bits to decimal](#Bits-to-decimal)
-- [Endians](#Endians)
+- [TODO](#TODO)
 
 # Introduction
 
-This project is just for educational purposes. I like computer architeture and C++, so, with this project I have found something nice to play with .
+This project is just for educational purposes. I like computer architeture and C++, so, with this project I have found something nice to play with.   
+This might be very useful for everyone who wants to learn about computer architeture, and how computeres store numbers in the memory and how we can play with them.
 
 # Indexes classes
 
@@ -134,7 +135,9 @@ The conversions are done in a naive & simple way!
 
 - ## Bits to decimal
 
-# Endians
+# TODO
 
-Nowadays, I just support little endians ...   
-But, work in progress for Big Endians too!
+There are some todos that I know that is needed. 
+
++ [] Allow conversion to big/little endian    
++ [] Add support for add between bytes
