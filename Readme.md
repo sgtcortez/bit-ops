@@ -135,6 +135,62 @@ The conversions are done in a naive & simple way!
 
 - ## Bits to decimal
 
+    The conversion from individual bits to decimal is quite simple either!  
+    In the **BitOps** class, we declare a virtual method called **`restore`**.   
+
+    The logic is very simple, is the reverse of decimal to binary.  
+
+    In the Byte class, we have:  
+    ```c++
+    uint8_t result = bit0;
+    result |= bit1 << 1;
+    result |= bit2 << 2;
+    result |= bit3 << 3;
+    result |= bit4 << 4;
+    result |= bit5 << 5;
+    result |= bit6 << 6;
+    result |= bit7 << 7;
+    return result;
+    ```
+
+    So, for exemple, the number 2(00000010 in binary) would work something like:   
+    | bit | bit value | shift by | result | 
+    | :-: | :-:       | :-:      | -:    |
+    | 0   | 0         |  0       | 0 |
+    | 1   | 1         | 1        | 10 |
+    | 2   | 0         | 2        | 010 |
+    | 3   | 0         | 3        | 0010 |
+    | 4   | 0         | 4        | 00010 |
+    | 5   | 0         | 5        | 000010 |
+    | 6   | 0         | 6        | 0000010 |
+    | 7   | 0         | 7        | 00000010 |
+
+    Other example, the number 15(00001111 in binary)
+    | bit | bit value | shift by | result | 
+    | :-: | :-:       | :-:      | -:    |
+    | 0   | 1         | 0        | 1 |
+    | 1   | 1         | 1        | 11 |
+    | 2   | 1         | 2        | 111 |
+    | 3   | 1         | 3        | 1111 |
+    | 4   | 0         | 4        | 01111 |
+    | 5   | 0         | 5        | 001111 |
+    | 6   | 0         | 6        | 0001111 |
+    | 7   | 0         | 7        | 00001111 |
+    
+    In the **`Word`** class, we have two instances of the **`Byte`** class(byte0 & byte1).  
+    We just restore the byte then, we shift the most significant byte by 8 than add(OR bitwise) with the leftmost.   
+    And, that's it! We restored the value.  
+
+    Code of the Word `restore` method.
+    ```c++
+    uint16_t Word::restore() const noexcept
+    {
+        uint16_t byte0 = this->byte0.restore();
+        uint16_t byte1 = this->byte1.restore();
+        return ( byte1 << 8 ) | byte0;   
+    }    
+    ```
+
 # TODO
 
 There are some todos that I know that is needed. 
