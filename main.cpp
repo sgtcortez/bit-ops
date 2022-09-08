@@ -1,4 +1,5 @@
 #include "BitOps.hpp"
+#include <cstdint>
 #include <iostream>
 
 using namespace std;
@@ -9,8 +10,8 @@ int main(int argc, char ** argv)
     (void(argc));
     (void(argv));
 
-    uint32_t number = 300;
-    Dword byte(number);
+    uint64_t number = 34359738368 + 3131414;
+    Qword byte(number);
     cout << byte.to_string() << endl;
     auto restored = byte.restore();
 

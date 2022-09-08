@@ -186,3 +186,50 @@ bool Dword::operator[](const DwordIndex index) const noexcept
     }
     return word1[{.value = static_cast<uint8_t>(index.value - 16)}];
 }
+
+Qword::Qword(uint64_t number): dword0((uint32_t) number), dword1((uint32_t) (number >> 32))
+{}
+
+string Qword::to_string() const noexcept
+{
+    string str = "";
+    str.append(dword1.to_string());
+    str.append(dword0.to_string());    
+    return str;
+}
+
+uint64_t Qword::restore() const noexcept
+{
+    uint64_t word0 = this->dword0.restore();
+    uint64_t word1 = this->dword1.restore();
+    return ( word1 << 32 ) | word0;   
+}
+
+uint8_t Qword::bits_size() const noexcept 
+{
+    return 64;
+}
+
+void Qword::flip(const QwordIndex index)
+{
+    if (index.value < 32)
+    {
+        dword0.flip(DwordIndex{.value = index.value});
+    } 
+    else 
+    {
+        dword1.flip(DwordIndex{.value = static_cast<uint8_t>(index.value - 32)});
+    }   
+}
+
+bool Qword::operator[](const QwordIndex index) const noexcept
+{
+    if (index.value < 32)
+    {
+        return dword0[{.value = static_cast<uint8_t>(index.value)}];
+    }
+    return dword1[{.value = static_cast<uint8_t>(index.value - 32)}];
+}
+
+
+

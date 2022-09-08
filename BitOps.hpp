@@ -89,4 +89,18 @@ class Dword : public BitOp<std::uint32_t, DwordIndex>
         bool operator[](const DwordIndex index) const noexcept;
 };
 
+class Qword : public BitOp<std::uint64_t, QwordIndex>
+{
+    private:
+        Dword dword0;
+        Dword dword1;
+    public:
+        Qword(std::uint64_t number);
+        std::string to_string() const noexcept;
+        std::uint64_t restore() const noexcept;
+        std::uint8_t bits_size() const noexcept;   
+        void flip(const QwordIndex index);     
+        bool operator[](const QwordIndex index) const noexcept;        
+};
+
 
