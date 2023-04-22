@@ -1,17 +1,16 @@
-CPP=clang++
+CXX=clang++
 
-CFLAGS=-g -Wall -Wextra -std=c++11
-CFLAGS+=-Werror
-CFLAGS+=-O0
+# User defined variables. 
+# Example: make OTHER_FLAGS="-g -DDEBUG=1"
+OTHER_FLAGS=
+
+CXXFLAGS=-std=c++11 ${OTHER_FLAGS} 
 
 STATICS=\
 	BitOps.o
 
-%.o: %.cpp %.hpp
-	$(CPP) $(CFLAGS) -c $< -o $@
-
 main.out: main.cpp $(STATICS) 
-	$(CPP) $(CFLAGS) -o $@ $^	
+	$(CXX) -o $@ $< $(LINKS) $(CXXFLAGS) $(STATICS)
 
 .PHONY: clean
 
