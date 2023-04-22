@@ -4,16 +4,25 @@
 
 using namespace std;
 
+constexpr static uint8_t BIT_0_SET = 0b1;
+constexpr static uint8_t BIT_1_SET = 0b1 << 1;
+constexpr static uint8_t BIT_2_SET = 0b1 << 2;
+constexpr static uint8_t BIT_3_SET = 0b1 << 3;
+constexpr static uint8_t BIT_4_SET = 0b1 << 4;
+constexpr static uint8_t BIT_5_SET = 0b1 << 5;
+constexpr static uint8_t BIT_6_SET = 0b1 << 6;
+constexpr static uint8_t BIT_7_SET = 0b1 << 7;
+
 Byte::Byte(uint8_t number)
 {
-    bit0 = number & 1;
-    bit1 = (number >> 1) & 1;
-    bit2 = (number >> 2) & 1;
-    bit3 = (number >> 3) & 1;
-    bit4 = (number >> 4) & 1;
-    bit5 = (number >> 5) & 1;
-    bit6 = (number >> 6) & 1;
-    bit7 = (number >> 7) & 1;            
+    bit0 = (number & BIT_0_SET) > 0;
+    bit1 = (number & BIT_1_SET) > 0;
+    bit2 = (number & BIT_2_SET) > 0;
+    bit3 = (number & BIT_3_SET) > 0;
+    bit4 = (number & BIT_4_SET) > 0;
+    bit5 = (number & BIT_5_SET) > 0;
+    bit6 = (number & BIT_6_SET) > 0;
+    bit7 = (number & BIT_7_SET) > 0;        
 };
 
 string Byte::to_string() const noexcept 
